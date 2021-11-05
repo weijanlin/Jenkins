@@ -1,0 +1,12 @@
+Ubuntu 版本安裝
+===
+
+### Step 1. 新增 Jenkins Repo
+由於 Jenkins deb repo 中並沒有 Jenkins 安裝包，因此需要透過第三方去下載 Jenkins repo
+```
+sudo apt-get install wget
+sudo apt-get update && apt-get install -y gnupg2
+wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add - 
+sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'  
+
+```
