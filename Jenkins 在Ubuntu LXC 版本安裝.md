@@ -54,5 +54,11 @@ Plugins extend Jenkins with additional features to support many different needs.
 - [ ] Select plugins to install
 > Getting Started 會跑一陣子
 > Jenkins 目前我安裝出現的是 2.303.3 
+![image](https://user-images.githubusercontent.com/17293913/140490162-e97b3219-0a8a-4365-b7b1-c3d64ff04f83.png)
+
 
 ### Step 6.輸入管理者資訊原則上Jenkins 就建置完成了
+![image](https://user-images.githubusercontent.com/17293913/140490184-ee2531b8-65d4-4b4b-a15f-1b9803bcc6cc.png)
+
+
+
