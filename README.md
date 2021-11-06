@@ -4,4 +4,9 @@
 * https://github.com/click-ap/Jenkins-tutorial
 
 
+## Ubuntu LXC 新增jenkins root 指令
+```
+sudo adduser jenkins
+usermod -aG root jenkins
+```
 
