@@ -1,0 +1,16 @@
+/** Must install plugin: ssh-steps
+**/
+def remote = [:]
+    remote.name = 'root'
+    remote.host = "${IP}"
+    remote.user = 'root'
+    remote.allowAnyHosts = true
+node() {
+    stage('test') {
+        withCredentials([sshUserPrivateKey(credentialsId: "jenkins-go", keyFileVariable: 'keyfile')]) {
+            remote.identityFile = keyFile
+            sshCommand remote: remote, dryRun: false, command: "echo Hello welcome to pve "
+ 
+        }
+    }
+}

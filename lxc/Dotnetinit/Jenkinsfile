@@ -1,0 +1,48 @@
+// Jenkinsfile (Scripted Pipeline)
+def remote = [:]
+    remote.name = 'root'
+    remote.host = "${IP}"
+    remote.user = 'root'
+    remote.allowAnyHosts = true
+
+node {
+    stage('update') {
+		withCredentials([sshUserPrivateKey(credentialsId: "jenkins-go", keyFileVariable: 'keyfile')]) {
+			remote.identityFile = keyFile
+			sshCommand remote: remote, dryRun: false, command: """
+				sudo apt-get update -y
+				sudo apt-get upgrade -y
+				"""
+		}
+	}
+		
+    stage('microsoft prod') {
+
+		withCredentials([sshUserPrivateKey(credentialsId: "jenkins-go", keyFileVariable: 'keyfile')]) {
+			remote.identityFile = keyFile
+			sshCommand remote: remote, dryRun: false, command: """
+				sudo apt-get install -y wget 
+				wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+				sudo dpkg -i packages-microsoft-prod.deb
+				rm packages-microsoft-prod.deb
+                sudo apt-get update -y
+                sudo apt-get install -y apt-transport-https 
+                sudo apt-get install -y vim 
+                sudo apt-get install -y curl 
+                sudo apt-get install -y git
+
+			"""
+		}
+    }
+    stage('dotnet-sdk-3.1') {
+		withCredentials([sshUserPrivateKey(credentialsId: "jenkins-go", keyFileVariable: 'keyfile')]) {
+			remote.identityFile = keyFile
+			sshCommand remote: remote, dryRun: false, command: """
+                sudo apt-get update -y
+                sudo apt-get install -y dotnet-sdk-3.1
+			"""
+		}
+    }
+
+      
+}
