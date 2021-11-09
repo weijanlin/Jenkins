@@ -10,7 +10,7 @@ StrictHostKeyChecking no
 ```
 or
 ```
-sudo sed -i "s/StrictHostKeyChecking yes/StrictHostKeyChecking no/g" /etc/ssh/ssh_config
+sudo sed -i "s/#   StrictHostKeyChecking ask/StrictHostKeyChecking no/g" /etc/ssh/ssh_config
 ```
 更改完存檔後記得重啟服務
 ```
