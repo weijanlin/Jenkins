@@ -1,0 +1,32 @@
+>vi /etc/ssh/sshd_config
+```
+Port 22
+PasswordAuthentication yes
+PermitRootLogin yes -> 是否開放 root 登入
+```
+>vi /etc/ssh/ssh_config
+```
+StrictHostKeyChecking no
+```
+or
+```
+sudo sed -i "s/#Port 22/Port 22/g" /etc/ssh/sshd_config
+sudo sed -i "s/#PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+sudo sed -i "s/#PermitRootLogin prohibit-password/#PermitRootLogin yes/g" /etc/ssh/sshd_config
+sudo sed -i "s/#   StrictHostKeyChecking ask/StrictHostKeyChecking no/g" /etc/ssh/ssh_config
+/etc/init.d/ssh restart
+```
+更改完存檔後記得重啟服務
+```
+sudo systemctl enable sshd.service
+/etc/init.d/ssh restart
+```
+在Jenkins 主機上下指令，直接使用ssh-copy-id 主機名命令將公鑰拷貝到對方的主機下，以數莓派為例，如下：
+```
+ssh-copy-id -i ~/.ssh/id_rsa.pub pi@192.168.11.130
+```
+## Raspberry Pi 預設ssh 服務是關閉的，所以要啟用它
+> source data:https://ithelp.ithome.com.tw/articles/10235452
+首先要獲得Raspberry pi的ip address，網路的話可以連wifi，也可以把網路線連接在電腦上或路由器上，在terminal輸入ifconfig 或者hostname -I 都可以得到目前的ip address。
+接下來要啟用ssh，從2016年底開始，Raspberry pi預設ssh都是關閉的，所以我們要先前往設定啟用它。
+[!](https://i.imgur.com/qwoBZ4F.png)
