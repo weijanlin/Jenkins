@@ -70,5 +70,30 @@ pct exec <id> -- bash -c "yum update -y &&\
     useradd -mU hogeuser &&\
     echo "password" | passwd --stdin hogeuser"
 ```
- 
+Create CT: 建立CT 預設為 2G RAM 4CORE 8GRAM Eth0
+Start CT：CT 開機
+Resize CT : CT 儲存空間擴充成20G
+Update CT : 更新CT及下載git ,wget 功能
+
+```
+ pct create 63013 /var/lib/vz/template/cache/ubuntu-18.04-standard_18.04.1-1_amd64.tar.gz \
+    -arch amd64 \
+    -ostype ubuntu \
+    -hostname hugo \
+    -cores 4 \
+    -memory 2048 \
+    -swap 2048 \
+    -storage local\
+    -password Vv25680117\
+    -net0 name=eth0,bridge=vmbr0,gw=192.168.11.1,ip=192.168.11.13/24,type=veth  &&\
+pct start 63013 &&\
+sleep 10 &&\
+pct resize 63013 rootfs +12G &&\
+pct exec 63013 -- bash -c "sudo apt-get update -y &&\
+    sudo apt-get upgrade -y &&\
+    sudo apt-get install -y wget &&\
+    sudo apt-get install -y git &&\
+	.\jenkins_ubuntu_lxc.sh &&\
+    echo "password" | passwd --stdin hogeuser"
+ ```
                                       
