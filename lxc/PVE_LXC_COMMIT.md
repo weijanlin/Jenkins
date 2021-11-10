@@ -96,4 +96,6 @@ pct exec 63013 -- bash -c "sudo apt-get update -y &&\
 	.\jenkins_ubuntu_lxc.sh &&\
     echo "password" | passwd --stdin hogeuser"
  ```
-                                      
+## Jenkins 失敗經驗
+### 帶pct exec VMID 是數字變數, 但用jenkins {$}帶入的是字串 , 若內容又帶字串用' 及 " 交互使用會出錯。
+	
