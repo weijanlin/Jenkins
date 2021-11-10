@@ -69,5 +69,6 @@ pct exec <id> -- bash -c "yum update -y &&\
     systemctl start sshd &&\
     useradd -mU hogeuser &&\
     echo "password" | passwd --stdin hogeuser"
-```                                      
+```
+ 
                                       
