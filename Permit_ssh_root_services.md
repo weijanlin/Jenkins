@@ -21,3 +21,8 @@ sudo sed -i "s/#   StrictHostKeyChecking ask/StrictHostKeyChecking no/g" /etc/ss
 /etc/init.d/ssh restart
 
 ```
+在Jenkins 主機上下指令，直接使用ssh-copy-id 主機名命令將公鑰拷貝到對方的主機下，以數莓派為例，如下：
+```
+ssh-copy-id -i ~/.ssh/id_rsa.pub pi@192.168.11.130
+```
+
